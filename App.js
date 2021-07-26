@@ -1,112 +1,112 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+// Generation of QR Code in React Native
+// https://aboutreact.com/generation-of-qr-code-in-react-native/
 
-import React from 'react';
-import type {Node} from 'react';
+// import React in our code
+import React, {useState} from 'react';
+
+// import all the components we are going to use
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
   Text,
-  useColorScheme,
   View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import QRCode from 'react-native-qrcode-svg';
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+const App = () => {
+  const [inputText, setInputText] = useState('');
+  const [qrvalue, setQrvalue] = useState('');
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+    <SafeAreaView style={{flex: 1}}>
+      <View style={styles.container}>
+        <Text style={styles.titleStyle}>
+          Generation of QR Code in React Native
+        </Text>
+        <QRCode
+          //QR code value
+          value={qrvalue ? qrvalue : 'NA'}
+          //size of QR Code
+          size={250}
+          //Color of the QR Code (Optional)
+          color="black"
+          //Background Color of the QR Code (Optional)
+          backgroundColor="white"
+          //Logo of in the center of QR Code (Optional)
+          logo={{
+            url: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/logosmalltransparen.png',
+          }}
+          //Center Logo size  (Optional)
+          logoSize={30}
+          //Center Logo margin (Optional)
+          logoMargin={2}
+          //Center Logo radius (Optional)
+          logoBorderRadius={15}
+          //Center Logo background (Optional)
+          logoBackgroundColor="yellow"
+        />
+        <Text style={styles.textStyle}>
+          Please insert any value to generate QR code
+        </Text>
+        <TextInput
+          style={styles.textInputStyle}
+          onChangeText={inputText => setInputText(inputText)}
+          placeholder="Enter Any Value"
+          value={inputText}
+        />
+        <TouchableOpacity
+          style={styles.buttonStyle}
+          onPress={() => setQrvalue(inputText)}>
+          <Text style={styles.buttonTextStyle}>Generate QR Code</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
+export default App;
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    padding: 10,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  titleStyle: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  textStyle: {
+    textAlign: 'center',
+    margin: 10,
   },
-  highlight: {
-    fontWeight: '700',
+  textInputStyle: {
+    flexDirection: 'row',
+    height: 40,
+    marginTop: 20,
+    marginLeft: 35,
+    marginRight: 35,
+    margin: 10,
+  },
+  buttonStyle: {
+    backgroundColor: '#51D8C7',
+    borderWidth: 0,
+    color: '#FFFFFF',
+    borderColor: '#51D8C7',
+    alignItems: 'center',
+    borderRadius: 5,
+    marginTop: 30,
+    padding: 10,
+  },
+  buttonTextStyle: {
+    color: '#FFFFFF',
+    paddingVertical: 10,
+    fontSize: 16,
   },
 });
-
-export default App;
