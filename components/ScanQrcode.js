@@ -83,6 +83,7 @@ export default class App extends Component {
         <View style={styles.conQR}>
           <QRCodeScanner
             showMarker
+            reactivate
             cameraStyle={{
               alignItems: 'center',
               justifyContent: 'center',
