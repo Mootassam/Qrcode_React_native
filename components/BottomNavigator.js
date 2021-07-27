@@ -1,11 +1,7 @@
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {createBottomTabNavigator} from 'react-navigation';
-import {
-  HomeNavigator,
-  ProfileNavigator,
-  SearchNavigator,
-} from './screen-stack-navigators';
+import {GenerateQrcodes, ScanQrcodes} from './StackNavigator';
 
 const getTabBarIcon = (navigation, focused, tintColor) => {
   const {routeName} = navigation.state;
@@ -15,8 +11,6 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
     iconName = 'ios-home';
   } else if (routeName === 'Profile') {
     iconName = 'ios-contact';
-  } else if (routeName === 'Search') {
-    iconName = 'ios-search';
   }
 
   return <IconComponent name={iconName} size={25} color={tintColor} />;
@@ -24,9 +18,8 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
 
 const BottomTabNavigator = createBottomTabNavigator(
   {
-    Home: HomeNavigator,
-    Profile: ProfileNavigator,
-    Search: SearchNavigator,
+    Generate: GenerateQrcodes,
+    Scan: ScanQrcodes,
   },
   {
     defaultNavigationOptions: ({navigation}) => ({
