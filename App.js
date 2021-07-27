@@ -1,112 +1,112 @@
-// Generation of QR Code in React Native
-// https://aboutreact.com/generation-of-qr-code-in-react-native/
+'use strict';
 
-// import React in our code
-import React, {useState} from 'react';
+import React, {Component} from 'react';
 
-// import all the components we are going to use
 import {
-  SafeAreaView,
-  Text,
-  View,
+  Dimensions,
   StyleSheet,
-  TextInput,
+  Text,
+  Alert,
+  View,
+  Button,
+  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 
-import QRCode from 'react-native-qrcode-svg';
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import GenerateQrcode from './components/GenerateQrcode';
 
-const App = () => {
-  const [inputText, setInputText] = useState('');
-  const [qrvalue, setQrvalue] = useState('');
+import ScanQrcode from './components/ScanQrcode';
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
-  return (
-    <SafeAreaView style={{flex: 1}}>
-      <View style={styles.container}>
-        <Text style={styles.titleStyle}>
-          Generation of QR Code in React Native
-        </Text>
-        <QRCode
-          //QR code value
-          value={qrvalue ? qrvalue : 'NA'}
-          //size of QR Code
-          size={250}
-          //Color of the QR Code (Optional)
-          color="black"
-          //Background Color of the QR Code (Optional)
-          backgroundColor="white"
-          //Logo of in the center of QR Code (Optional)
-          logo={{
-            url: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/logosmalltransparen.png',
-          }}
-          //Center Logo size  (Optional)
-          logoSize={30}
-          //Center Logo margin (Optional)
-          logoMargin={2}
-          //Center Logo radius (Optional)
-          logoBorderRadius={15}
-          //Center Logo background (Optional)
-          logoBackgroundColor="yellow"
-        />
-        <Text style={styles.textStyle}>
-          Please insert any value to generate QR code
-        </Text>
-        <TextInput
-          style={styles.textInputStyle}
-          onChangeText={inputText => setInputText(inputText)}
-          placeholder="Enter Any Value"
-          value={inputText}
-        />
-        <TouchableOpacity
-          style={styles.buttonStyle}
-          onPress={() => setQrvalue(inputText)}>
-          <Text style={styles.buttonTextStyle}>Generate QR Code</Text>
-        </TouchableOpacity>
+console.disableYellowBox = true;
+
+export default class App extends Component {
+  render() {
+    return (
+      <View style={styles.conMain}>
+        <ScanQrcode />
       </View>
-    </SafeAreaView>
-  );
-};
-export default App;
+    );
+  }
+}
+
+const overlayColor = 'rgba(0,0,0,0.5)'; // this gives us a black color with a 50% transparency
+
+const rectDimensions = SCREEN_WIDTH * 0.5; // this is equivalent to 255 from a 393 device width
+const rectBorderWidth = SCREEN_WIDTH * 0.005; // this is equivalent to 2 from a 393 device width
+const rectBorderColor = 'red';
+
+const scanBarWidth = SCREEN_WIDTH * 0.46; // this is equivalent to 180 from a 393 device width
+const scanBarHeight = SCREEN_WIDTH * 0.0025; //this is equivalent to 1 from a 393 device width
+const scanBarColor = '#22ff00';
 
 const styles = StyleSheet.create({
-  container: {
+  rectangleContainer: {
     flex: 1,
-    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+  conMain: {
+    flex: 1,
+    height: SCREEN_HEIGHT,
+  },
+  conHeader: {
+    backgroundColor: '#6200EE',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textHeader: {
+    fontSize: 18,
+    color: 'white',
+  },
+  conQR: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  centerText: {
+    marginLeft: 15,
+    fontSize: 20,
+    color: 'orange',
+  },
+  rectangle: {
+    height: rectDimensions,
+    width: rectDimensions,
+    borderWidth: rectBorderWidth,
+    borderColor: rectBorderColor,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+
+  topOverlay: {
+    // height: SCREEN_WIDTH,
+    width: SCREEN_WIDTH,
+    // backgroundColor: overlayColor,
     justifyContent: 'center',
     alignItems: 'center',
-    textAlign: 'center',
-    padding: 10,
   },
-  titleStyle: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+
+  bottomOverlay: {
+    flex: 1,
+    height: SCREEN_WIDTH,
+    width: SCREEN_WIDTH,
+    backgroundColor: overlayColor,
+    paddingBottom: SCREEN_WIDTH * 0.25,
   },
-  textStyle: {
-    textAlign: 'center',
-    margin: 10,
+
+  leftAndRightOverlay: {
+    height: SCREEN_WIDTH * 0.65,
+    width: SCREEN_WIDTH,
+    backgroundColor: overlayColor,
   },
-  textInputStyle: {
-    flexDirection: 'row',
-    height: 40,
-    marginTop: 20,
-    marginLeft: 35,
-    marginRight: 35,
-    margin: 10,
-  },
-  buttonStyle: {
-    backgroundColor: '#51D8C7',
-    borderWidth: 0,
-    color: '#FFFFFF',
-    borderColor: '#51D8C7',
-    alignItems: 'center',
-    borderRadius: 5,
-    marginTop: 30,
-    padding: 10,
-  },
-  buttonTextStyle: {
-    color: '#FFFFFF',
-    paddingVertical: 10,
-    fontSize: 16,
+
+  scanBar: {
+    width: scanBarWidth,
+    height: scanBarHeight,
+    backgroundColor: scanBarColor,
   },
 });
