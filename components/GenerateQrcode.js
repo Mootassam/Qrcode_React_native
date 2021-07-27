@@ -16,7 +16,7 @@ import {
 
 import QRCode from 'react-native-qrcode-svg';
 
-const App = () => {
+const App = ({navigation}) => {
   const [inputText, setInputText] = useState('');
   const [qrvalue, setQrvalue] = useState('');
 

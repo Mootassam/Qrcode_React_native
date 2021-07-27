@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 
 import {
   Dimensions,
@@ -20,138 +20,70 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 console.disableYellowBox = true;
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dataqr: '',
-      status: 'Ready',
-      userData: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-      },
-    };
-  }
-  onSuccess(e) {
-    const [firstName, lastName, email, phone] = e.data.split(';'); // filtering if there's a dataset object besides, the data will be splitted if found ';'
-    this.setState({
-      dataqr: this.state.dataqr + ', ' + e.data,
-      status: 'Coba Lagi',
-    });
-    if (email !== undefined) {
-      this.setState({
-        userData: {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          phone: phone,
-        },
-      });
-      Alert.alert(
-        'QR Code',
-        'target email : ' + email,
-        [
-          {
-            text: 'OK',
-            onPress: () =>
-              this.setState({userData: {firstName: ''}, dataqr: ''}),
-          },
-        ],
-        {cancelable: false},
-      );
-    } else {
-      Alert.alert(
-        'QR Code',
-        'Code : ' + e.data,
-        [{text: 'OK', onPress: () => console.warn('OK Pressed')}],
-        {cancelable: false},
-      );
-    }
-  }
+const App = ({navigation}) => {
+  const [inputText, setInputText] = useState('');
+  const [qrvalue, setQrvalue] = useState('');
+  const onSuccess = e => {
+    navigation.navigate('Qr1');
+  };
 
-  render() {
-    const {userData} = this.state;
-    const {firstName, lastName, email, phone} = userData;
-
-    return (
-      <View style={styles.conMain}>
-        {/* <View style={styles.conHeader}>
-          <Text style={styles.textHeader}>Contoh QR Code yang ke 129123x</Text>
-      </View> */}
-        <View style={styles.conQR}>
-          <QRCodeScanner
-            showMarker
-            reactivate
-            cameraStyle={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              flex: 1,
-            }}
-            customMarker={
-              <View>
-                <View style={{paddingTop: 20, flexDirection: 'row'}}>
-                  <TouchableOpacity
-                    onPress={() => Alert.alert('Button Pressed!')}
-                    style={{flexDirection: 'row', paddingLeft: 15}}>
-                    <Text style={styles.centerText}>QR Scanner</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.rectangleContainer}>
-                  <View style={styles.topOverlay}>
-                    <Text style={{fontSize: 12, color: 'white'}}>
-                      Scan QR Code here
-                    </Text>
-                  </View>
-
-                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    {/* <View style={styles.leftAndRightOverlay} /> */}
-
-                    <View style={styles.rectangle} />
-
-                    {/* <View style={styles.leftAndRightOverlay} /> */}
-                  </View>
-
-                  {/* <View style={styles.bottomOverlay} /> */}
-                </View>
+  return (
+    <View style={styles.conMain}>
+      {/* <View style={styles.conHeader}>
+      <Text style={styles.textHeader}>Contoh QR Code yang ke 129123x</Text>
+  </View> */}
+      <View style={styles.conQR}>
+        <QRCodeScanner
+          showMarker
+          reactivate
+          cameraStyle={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            flex: 1,
+          }}
+          customMarker={
+            <View>
+              <View style={{paddingTop: 20, flexDirection: 'row'}}>
+                <TouchableOpacity
+                  onPress={() => Alert.alert('Button Pressed!')}
+                  style={{flexDirection: 'row', paddingLeft: 15}}>
+                  <Text style={styles.centerText}>Nom Of School</Text>
+                </TouchableOpacity>
               </View>
-            }
-            onRead={e => this.onSuccess(e)}
-            ref={node => {
-              this.scanner = node;
-            }}
-          />
-        </View>
-        <View style={{flex: 1, backgroundColor: 'white', padding: 15}}>
-          <Text style={{alignSelf: 'center', textAlign: 'center'}}>
-            Pencet tombol 'Coba Lagi' jika ingin menscan kembali
-          </Text>
-          <Button
-            title={this.state.status}
-            onPress={() => {
-              this.scanner.reactivate();
-              this.setState({status: 'Ready'});
-            }}
-          />
-          <Text style={{fontSize: 12, fontWeight: 'bold'}}>Code</Text>
-          <ScrollView>
-            {firstName === '' ? (
-              <Text>{this.state.dataqr}</Text>
-            ) : (
-              <View>
-                <Text>{firstName}</Text>
-                <Text>{email}</Text>
-                <Text>{phone}</Text>
+              <View style={styles.rectangleContainer}>
+                <View style={styles.topOverlay}>
+                  <Text style={{fontSize: 12, color: 'white'}}>
+                    Scan QR Code here
+                  </Text>
+                </View>
+
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  {/* <View style={styles.leftAndRightOverlay} /> */}
+
+                  <View style={styles.rectangle} />
+
+                  {/* <View style={styles.leftAndRightOverlay} /> */}
+                </View>
+
+                {/* <View style={styles.bottomOverlay} /> */}
               </View>
-            )}
-          </ScrollView>
-        </View>
+            </View>
+          }
+          onRead={e => onSuccess(e)}
+          ref={node => {
+            const scanner = node;
+          }}
+        />
       </View>
-    );
-  }
-}
-
+      <View style={{backgroundColor: 'white', padding: 15}}>
+        <Text style={{alignSelf: 'center', textAlign: 'center'}}>
+          Im Text will be here
+        </Text>
+      </View>
+    </View>
+  );
+};
+export default App;
 const overlayColor = 'rgba(0,0,0,0.5)'; // this gives us a black color with a 50% transparency
 
 const rectDimensions = SCREEN_WIDTH * 0.5; // this is equivalent to 255 from a 393 device width
@@ -161,7 +93,6 @@ const rectBorderColor = 'red';
 const scanBarWidth = SCREEN_WIDTH * 0.46; // this is equivalent to 180 from a 393 device width
 const scanBarHeight = SCREEN_WIDTH * 0.0025; //this is equivalent to 1 from a 393 device width
 const scanBarColor = '#22ff00';
-
 const styles = StyleSheet.create({
   rectangleContainer: {
     flex: 1,
