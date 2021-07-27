@@ -24,7 +24,14 @@ const App = ({navigation}) => {
   const [inputText, setInputText] = useState('');
   const [qrvalue, setQrvalue] = useState('');
   const onSuccess = e => {
-    navigation.navigate('Qr1');
+    if (e.data === 'qr1') {
+      navigation.navigate('Qr1');
+    } else if (e.data === 'qr2') {
+      navigation.navigate('Qr2');
+    } else {
+      alert('this code is not recognize please check another');
+    }
+    //
   };
 
   return (

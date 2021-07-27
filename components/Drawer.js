@@ -1,5 +1,6 @@
 import {createAppContainer, createDrawerNavigator} from 'react-navigation';
 import Qr1 from '../Screens/Qr1';
+import Qr2 from '../Screens/Qr2';
 import BottomNavigator from './BottomNavigator';
 import ScanQrcode from './ScanQrcode';
 
@@ -10,6 +11,7 @@ const DrawerNavigator = createDrawerNavigator({
   Generate: BottomNavigator,
   Scan: ScanQrcode,
   Qr1: Qr1,
+  Qr2: Qr2,
 });
 
 const Drawer = createAppContainer(DrawerNavigator);

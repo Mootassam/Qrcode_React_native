@@ -7,9 +7,9 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
   const {routeName} = navigation.state;
   let IconComponent = Ionicons;
   let iconName;
-  if (routeName === 'Home') {
+  if (routeName === 'Generate') {
     iconName = 'ios-home';
-  } else if (routeName === 'Profile') {
+  } else if (routeName === 'Scan') {
     iconName = 'ios-contact';
   }
 
