@@ -17,7 +17,7 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
   if (routeName === 'Generate') {
     iconName = 'ios-home';
   } else if (routeName === 'Scan') {
-    iconName = 'ios-contact';
+    iconName = 'ios-qr-code';
   }
 
   return <IconComponent name={iconName} size={25} color={tintColor} />;
