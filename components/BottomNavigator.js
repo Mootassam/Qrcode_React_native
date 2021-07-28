@@ -1,4 +1,11 @@
 import React from 'react';
+import FontAwesome, {
+  SolidIcons,
+  RegularIcons,
+  BrandIcons,
+  parseIconFromClassName,
+  parseIconName,
+} from 'react-native-fontawesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {createBottomTabNavigator} from 'react-navigation';
 import {GenerateQrcodes, ScanQrcodes} from './StackNavigator';

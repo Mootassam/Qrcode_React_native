@@ -1,11 +1,9 @@
 'use strict';
-
-import React, {Component} from 'react';
-
+import React, {Component, useEffect} from 'react';
 import Drawer from './components/Drawer';
 
-export default class App extends Component {
-  render() {
-    return <Drawer />;
-  }
-}
+const App = () => {
+  return <Drawer />;
+};
+
+export default App;

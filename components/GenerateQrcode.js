@@ -1,10 +1,5 @@
-// Generation of QR Code in React Native
-// https://aboutreact.com/generation-of-qr-code-in-react-native/
-
-// import React in our code
 import React, {useState} from 'react';
 
-// import all the components we are going to use
 import {
   SafeAreaView,
   Text,
@@ -17,15 +12,13 @@ import {
 import QRCode from 'react-native-qrcode-svg';
 
 const App = ({navigation}) => {
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState('Generation of QR Code');
   const [qrvalue, setQrvalue] = useState('');
 
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
-        <Text style={styles.titleStyle}>
-          Generation of QR Code in React Native
-        </Text>
+        <Text style={styles.titleStyle}>{inputText}</Text>
         <QRCode
           //QR code value
           value={qrvalue ? qrvalue : 'NA'}
@@ -36,9 +29,6 @@ const App = ({navigation}) => {
           //Background Color of the QR Code (Optional)
           backgroundColor="white"
           //Logo of in the center of QR Code (Optional)
-          logo={{
-            url: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/logosmalltransparen.png',
-          }}
           //Center Logo size  (Optional)
           logoSize={30}
           //Center Logo margin (Optional)
@@ -48,19 +38,25 @@ const App = ({navigation}) => {
           //Center Logo background (Optional)
           logoBackgroundColor="yellow"
         />
-        <Text style={styles.textStyle}>
-          Please insert any value to generate QR code
-        </Text>
-        <TextInput
-          style={styles.textInputStyle}
-          onChangeText={inputText => setInputText(inputText)}
-          placeholder="Enter Any Value"
-          value={inputText}
-        />
+      </View>
+      <View style={styles.download}>
         <TouchableOpacity
           style={styles.buttonStyle}
-          onPress={() => setQrvalue(inputText)}>
-          <Text style={styles.buttonTextStyle}>Generate QR Code</Text>
+          onPress={() => setQrvalue('qr1')}>
+          <Text style={styles.buttonTextStyle}>Text of Qr1</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonDownload} onPress={() => {}}>
+          <Text style={styles.buttonTextStyle}>Download QR1</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.download}>
+        <TouchableOpacity
+          style={styles.buttonStyle}
+          onPress={() => setQrvalue('qr2')}>
+          <Text style={styles.buttonTextStyle}>Text of Qr2</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonDownload} onPress={() => {}}>
+          <Text style={styles.buttonTextStyle}>Download QR2</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -75,12 +71,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    padding: 10,
   },
   titleStyle: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+    paddingBottom: 15,
   },
   textStyle: {
     textAlign: 'center',
@@ -95,18 +91,36 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   buttonStyle: {
-    backgroundColor: '#51D8C7',
+    backgroundColor: 'rgb(53,126,221)',
     borderWidth: 0,
     color: '#FFFFFF',
     borderColor: '#51D8C7',
     alignItems: 'center',
     borderRadius: 5,
     marginTop: 30,
-    padding: 10,
+    padding: 2,
+    width: 150,
+  },
+  buttonDownload: {
+    backgroundColor: 'rgb(222,76,36)',
+    borderWidth: 0,
+    color: '#FFFFFF',
+    borderColor: '#51D8C7',
+    alignItems: 'center',
+    borderRadius: 5,
+    marginTop: 30,
+    padding: 2,
+    width: 150,
   },
   buttonTextStyle: {
     color: '#FFFFFF',
     paddingVertical: 10,
     fontSize: 16,
+  },
+  download: {
+    alignContent: 'flex-start',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    padding: 15,
   },
 });
