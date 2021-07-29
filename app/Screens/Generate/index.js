@@ -23,6 +23,8 @@ export default function Generate() {
           value={qrvalue ? qrvalue : 'NA'}
           //size of QR Code
           size={250}
+          enableLinearGradient
+          gradientDirection
           //Color of the QR Code (Optional)
           color="black"
           //Background Color of the QR Code (Optional)
