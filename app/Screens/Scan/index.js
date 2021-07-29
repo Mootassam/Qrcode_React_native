@@ -20,7 +20,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 console.disableYellowBox = true;
 
-const App = ({navigation}) => {
+export default function Scan({navigation}) {
   const [inputText, setInputText] = useState('');
   const [qrvalue, setQrvalue] = useState('');
   const onSuccess = e => {
@@ -89,8 +89,8 @@ const App = ({navigation}) => {
       </View>
     </View>
   );
-};
-export default App;
+}
+
 const overlayColor = 'rgba(0,0,0,0.5)'; // this gives us a black color with a 50% transparency
 
 const rectDimensions = SCREEN_WIDTH * 0.5; // this is equivalent to 255 from a 393 device width

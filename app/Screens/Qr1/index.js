@@ -1,19 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  FlatList,
-  StyleSheet,
-  SafeAreaView,
-} from 'react-native';
+import {View, Text, StyleSheet, Button} from 'react-native';
 
-export default function Qr1() {
-  const [image, setImage] = useState('');
-
+export default function Detail1({navigation}) {
   return (
     <View>
       <Text>Im Qr1 Detaills</Text>
+      <Button title="go back" />
     </View>
   );
 }

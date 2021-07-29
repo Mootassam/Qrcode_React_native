@@ -8,10 +8,9 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-
 import QRCode from 'react-native-qrcode-svg';
 
-const App = ({navigation}) => {
+export default function Generate() {
   const [inputText, setInputText] = useState('Generation of QR Code');
   const [qrvalue, setQrvalue] = useState('');
 
@@ -61,8 +60,7 @@ const App = ({navigation}) => {
       </View>
     </SafeAreaView>
   );
-};
-export default App;
+}
 
 const styles = StyleSheet.create({
   container: {
