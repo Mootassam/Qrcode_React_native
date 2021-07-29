@@ -5,7 +5,12 @@ export default function Detail1({navigation}) {
   return (
     <View>
       <Text>Im Qr1 Detaills</Text>
-      <Button title="go back" />
+      <Button
+        title="go back"
+        onPress={() => {
+          navigation.goBack();
+        }}
+      />
     </View>
   );
 }
